@@ -1,0 +1,26 @@
+* Se cambio la estructura del documento:
+
+    ├── config
+    │   └── db.php
+    ├── public
+    │   ├── assets
+    │   │   ├── css
+    │   │   │   └── styles.css
+    │   │   ├── images
+    │   │   └── js
+    │   ├── process
+    │   │   └── register_process.php
+    │   └── views
+    │       ├── index.php
+    │       ├── login.php
+    │       ├── register.php
+    │       └── uwu.php
+    ├── README.md
+    └── xampp
+        └── xampp-linux-x64-8.2.12-0-installer.run
+
+# Ignore el directorio xampp, es para los que usan linux y no usan el instalador.
+
+* Se cambiaron las extensiones .html por .php para seguir los estándares.
+
+* Se cambió registar.php a register_process.php para seguir los estándares.
