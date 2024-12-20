@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookSwap</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fbeee6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #a83232;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        header .icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        header .icons img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .search-bar input {
+            width: 80%;
+            padding: 0.5rem;
+            border: 2px solid #a83232;
+            border-radius: 5px;
+        }
+
+        .container {
+            display: flex;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .sidebar {
+            flex: 1;
+            background-color: #f8d4d1;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .sidebar h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar .tags {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar .tags input {
+            margin-right: 0.5rem;
+        }
+
+        .sidebar .buttons {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar .buttons button {
+            background-color: #a83232;
+            color: white;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .main-content {
+            flex: 3;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            max-height: 200px;
+        }
+
+        .card h3 {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .card button {
+            background-color: #a83232;
+            color: white;
+            padding: 0.7rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .card .heart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">BookSwap</div>
+        <div class="icons">
+            <img src="mail_icon.png" alt="Mail">
+            <img src="user_icon.png" alt="User">
+        </div>
+    </header>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Buscar...">
+    </div>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>RESULTADOS DE BÚSQUEDA</h2>
+            <div class="tags">
+                <label><input type="checkbox" checked> Romance</label>
+                <label><input type="checkbox" checked> Ficción</label>
+                <label><input type="checkbox"> Terror</label>
+                <label><input type="checkbox" checked> Fantasía</label>
+                <label><input type="checkbox"> Histórico</label>
+                <label><input type="checkbox"> Ciencia ficción</label>
+            </div>
+            <div class="buttons">
+                <button>Buscar por libro</button>
+                <button>Buscar por usuario</button>
+            </div>
+            <p>¿Quieres guardar un libro para después? Márcalo con un ❤️ para guardarlo en tu lista de deseos.</p>
+        </aside>
+
+        <section class="main-content">
+            <div class="card">
+                <img src="harry_potter.jpg" alt="Harry Potter">
+                <h3>Harry Potter y la Piedra Filosofal</h3>
+                <p>Subido por ana1968</p>
+                <button>Solicitar</button>
+            </div>
+            <div class="card">
+                <img src="lotr.jpg" alt="El Señor de los Anillos">
+                <h3>El Señor de los Anillos</h3>
+                <p>Subido por alwayslouis</p>
+                <button>Solicitar</button>
+            </div>
+            <div class="card">
+                <img src="frankenstein.jpg" alt="Frankenstein">
+                <h3>Frankenstein</h3>
+                <p>Subido por elbichopapao</p>
+                <button>Solicitar</button>
+            </div>
+            <div class="card">
+                <img src="got.jpg" alt="Juego de Tronos">
+                <h3>Juego de Tronos</h3>
+                <p>Subido por pato28</p>
+                <button>Solicitar</button>
+            </div>
+            <div class="card">
+                <img src="maze_runner.jpg" alt="Maze Runner">
+                <h3>Maze Runner "Correr o Morir"</h3>
+                <p>Subido por patiuw</p>
+                <button>Solicitar</button>
+            </div>
+            <div class="card">
+                <img src="twilight.jpg" alt="Crepúsculo">
+                <h3>Crepúsculo</h3>
+                <p>Subido por bvitta</p>
+                <button>Solicitar</button>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
