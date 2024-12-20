@@ -1,0 +1,272 @@
+/* Reset y configuración general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 20px; /* Margen opcional */
+}
+
+.logo-img {
+    width: 150px; /* Ajusta el tamaño según sea necesario */
+    height: auto; /* Mantiene la proporción de la imagen */
+}
+
+body {
+    background-color: #FCECE1; /* Fondo crema */
+    color: #5A2E2E; /* Color marrón oscuro */
+}
+
+/* Estilo del encabezado */
+header {
+    background-color: #A23232; /* Color rojo vino */
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+header .profile-icon {
+    font-size: 1.5rem;
+}
+
+/* Contenido principal */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* Sección de texto */
+.text {
+    max-width: 500px;
+}
+
+.text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.text .highlight {
+    color: #A23232; /* Resaltar "BOOKSWAP" */
+    font-weight: bold; /* Aumenta el grosor del texto */
+}
+
+.text p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.register {
+    background-color: #A23232; /* Botón rojo vino */
+}
+
+.login {
+    background-color: #5A2E2E; /* Botón marrón oscuro */
+}
+
+.btn:hover {
+    background-color: #8C2626; /* Efecto hover */
+}
+/* Sección de la imagen */
+.image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+/* Estilo del contenedor central */
+.form-container {
+    background-color: #A23232; /* Fondo rojo vino */
+    border-radius: 15px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+/* Títulos del formulario */
+.form-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Etiquetas y campos del formulario */
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #5A2E2E; /* Texto oscuro */
+    font-style: italic;
+}
+
+.form-container input::placeholder {
+    color: #ccc;
+    font-style: italic;
+}
+
+.form-container button {
+    background-color: #5A2E2E; /* Botón marrón oscuro */
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.form-container button:hover {
+    background-color: #8C2626; /* Hover efecto */
+}
+
+.form-container p {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.form-container p a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Estilo del contenedor central */
+.form-container {
+    background-color: #A23232; /* Fondo rojo vino */
+    border-radius: 15px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+/* Títulos del formulario */
+.form-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Etiquetas y campos del formulario */
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #5A2E2E; /* Texto oscuro */
+    font-style: italic;
+}
+
+.form-container input::placeholder {
+    color: #ccc;
+    font-style: italic;
+}
+
+.form-container button {
+    background-color: #5A2E2E; /* Botón marrón oscuro */
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.form-container button:hover {
+    background-color: #8C2626; /* Hover efecto */
+}
+
+.form-container p {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.form-container p a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .buttons {
+        justify-content: center;
+    }
+}
