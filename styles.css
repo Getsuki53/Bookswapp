@@ -186,6 +186,79 @@ main {
     text-decoration: underline;
 }
 
+/* Estilo del contenedor central */
+.form-container {
+    background-color: #A23232; /* Fondo rojo vino */
+    border-radius: 15px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+/* Títulos del formulario */
+.form-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Etiquetas y campos del formulario */
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #5A2E2E; /* Texto oscuro */
+    font-style: italic;
+}
+
+.form-container input::placeholder {
+    color: #ccc;
+    font-style: italic;
+}
+
+.form-container button {
+    background-color: #5A2E2E; /* Botón marrón oscuro */
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.form-container button:hover {
+    background-color: #8C2626; /* Hover efecto */
+}
+
+.form-container p {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.form-container p a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+
 /* Responsividad */
 @media (max-width: 768px) {
     .content {

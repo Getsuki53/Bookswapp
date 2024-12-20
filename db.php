@@ -1,13 +1,13 @@
 <?php
 $servername = "localhost";
-$username = "root"; // El usuario predeterminado en XAMPP
-$password = ""; // La contraseña predeterminada en XAMPP es vacía
-$dbname = "tu_base_de_datos"; // Cambia por el nombre de tu base de datos
+$username = "root";
+$password = "";
+$dbname = "bookswap";
 
-// Crear la conexión
+// Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Comprobar la conexión
+// Verificar conexión
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
