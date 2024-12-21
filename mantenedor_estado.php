@@ -1,6 +1,6 @@
 <?php
 // Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "Patita05$", "bookswap");
+$conexion = new mysqli("localhost", "root", "", "bookswap");
 
 // Manejar errores de conexión
 if ($conexion->connect_error) {
