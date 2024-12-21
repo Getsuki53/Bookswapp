@@ -1,0 +1,225 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FCECE1;
+    /* background-color: #b22222; */
+    margin: 0;
+    padding: 0;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 20px; /* Margen opcional */
+}
+
+.logo-img {
+    width: 150px; /* Ajusta el tamaño según sea necesario */
+    height: auto; /* Mantiene la proporción de la imagen */
+}
+
+/* Estilo del encabezado */
+header {
+    background-color: #A23232; /* Color rojo vino */
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+header .profile-icon {
+    font-size: 1.5rem;
+}
+
+/* Sección de texto */
+.text {
+    max-width: 500px;
+}
+
+.text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.text .highlight {
+    color: #A23232; /* Resaltar "BOOKSWAP" */
+    font-weight: bold; /* Aumenta el grosor del texto */
+}
+
+.text p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.register {
+    background-color: #A23232; /* Botón rojo vino */
+}
+
+.login {
+    background-color: #5A2E2E; /* Botón marrón oscuro */
+}
+
+.btn:hover {
+    background-color: #8C2626; /* Efecto hover */
+}
+
+input:focus, select:focus, button:focus {
+    border-color: #A23232;
+    outline: none;
+    box-shadow: 0 0 5px rgba(162, 50, 50, 0.8);
+}
+
+
+/* Sección de la imagen */
+.image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.container {
+    width: 100%; 
+    max-width: 1200px;
+    /* max-width: 900px; */
+    margin: 30px auto;
+    background-color: #fff;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo del contenedor central */
+.form-container {
+    flex: 1;
+    background-color: #A23232; /* Fondo rojo vino */
+    border-radius: 15px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+    /* width: 100%; */
+    text-align: center;
+    color: #fff;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+.form-container h1 {
+    text-align: center;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+form {
+    width: 100%;
+}
+
+column:invalid {
+    border-color: #ff4d4d;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.column {
+    flex: 1;
+    padding: 0 10px;
+    min-width: 100px; /* Para dispositivos pequeños */
+}
+
+.full-width {
+    flex: 1 1 100%;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 95%;
+    padding: 8px;
+    /* margin-bottom: 10px; */
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #8b0000;
+    padding: 8px;
+    color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 30%;
+}
+
+button:hover {
+    background-color: #5c0000;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 800px) {
+    .row {
+        flex-direction: column;
+    }
+    .column {
+        padding: 0;
+    }
+}
+.register-box {
+    padding: 5px;
+    border-radius: 15px; /* Esquinas redondeadas opcionales */
+    max-width: 400px; /* Ajusta el tamaño */
+    margin: 5px auto; /* Centra horizontalmente */
+    /* background-color: #A23232; */
+    background-color: #8b0000;
+}
+
+.register-box h2 {
+    text-align: center;
+    color: #ffffff; /* Color del texto */
+}
