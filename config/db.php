@@ -1,9 +1,9 @@
 <?php
 
 $servername = "localhost";
-$username = "usuario"; // El usuario predeterminado en XAMPP
-$password = "contraseña"; // La contraseña predeterminada en XAMPP es vacía
-$dbname = "base_de_datos"; // Cambia por el nombre de tu base de datos
+$username = "yayoh19"; // El usuario predeterminado en XAMPP
+$password = "Metano1_Etano2"; // La contraseña predeterminada en XAMPP es vacía
+$dbname = "bookswap"; // Cambia por el nombre de tu base de datos
 
 // Crear la conexión
 $conn = new mysqli($servername, $username, $password, $dbname);

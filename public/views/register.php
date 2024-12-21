@@ -1,3 +1,21 @@
+<?php
+// Inicializar variable para saber si el campo de correo es inválido
+$email_error = false;
+
+// Verificar si el formulario fue enviado
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    $correo = $_POST['correo'] ?? '';
+
+    // Validar el correo
+    if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+        $email_error = true;  // Marcar como error si el correo es inválido
+    }
+
+    // Aquí puedes continuar con la lógica de validación y procesamiento del formulario
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -21,9 +39,14 @@
                     <label for="apellido">Apellido</label>
                     <input type="text" id="apellido" name="apellido" placeholder="Pérez" required>
                     
-                    <label for="correo">Correo</label>
-                    <input type="email" id="correo" name="correo" placeholder="tucorreo@ejemplo.com" required>
+                    <label for="correo">Correo:</label>
+                    <input type="email" name="correo" id="correo" value="<?php echo $correo; ?>" 
+                    class="<?php echo $email_error ? 'invalid' : ''; ?>">
                     
+                    <?php if ($email_error): ?>
+                        <p style="color: red;">Por favor, ingresa un correo válido.</p>
+                    <?php endif; ?>
+
                     <label for="username">Nombre de usuario</label>
                     <input type="text" id="username" name="username" placeholder="TuUsuario" required>
                     
