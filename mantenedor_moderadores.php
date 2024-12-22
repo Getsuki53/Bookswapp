@@ -51,6 +51,7 @@ $resultado = $conexion->query("SELECT * FROM moderador WHERE Oculto = 1");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mantenedor de Moderadores</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mantenedores.css">
 </head>
 <body>
     <div class="sidebar">
