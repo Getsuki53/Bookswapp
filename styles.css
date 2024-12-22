@@ -6,19 +6,6 @@
     font-family: 'Archivo Black', sans-serif;
 }
 
-/* Logo */
-.logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px 20px; /* Margen opcional */
-}
-
-.logo-img {
-    width: 150px; /* Ajusta el tamaño según sea necesario */
-    height: auto; /* Mantiene la proporción de la imagen */
-}
-
 body {
     background-color: #FCECE1; /* Fondo crema */
     color: #5A2E2E; /* Color marrón oscuro */
@@ -39,161 +26,139 @@ header .logo {
     font-weight: bold;
 }
 
-header .profile-icon {
-    font-size: 1.5rem;
+header .icons img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
 }
 
-/* Contenido principal */
-main {
+/* Barra de búsqueda */
+.search-bar {
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 80vh;
-    padding: 20px;
+    margin: 1rem 0;
 }
 
-.content {
+.search-input {
+    width: 80%;
+    padding: 0.5rem;
+    border: 2px solid #A23232;
+    border-radius: 5px;
+}
+
+/* Contenedor principal */
+.container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    max-width: 1200px;
-    width: 100%;
+    padding: 1rem;
+    gap: 1rem;
 }
 
-/* Sección de texto */
-.text {
-    max-width: 500px;
-}
-
-.text h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-.text .highlight {
-    color: #A23232; /* Resaltar "BOOKSWAP" */
-    font-weight: bold; /* Aumenta el grosor del texto */
-}
-
-.text p {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    line-height: 1.5;
-}
-
-.buttons {
-    display: flex;
-    gap: 15px;
-}
-
-.btn {
-    text-decoration: none;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-weight: bold;
-    transition: background 0.3s;
-}
-
-.register {
-    background-color: #A23232; /* Botón rojo vino */
-}
-
-.login {
-    background-color: #5A2E2E; /* Botón marrón oscuro */
-}
-
-.btn:hover {
-    background-color: #8C2626; /* Efecto hover */
-}
-/* Sección de la imagen */
-.image img {
-    width: 100%;
-    max-width: 500px;
+/* Barra lateral */
+.sidebar {
+    flex: 1;
+    background-color: #F8D4D1;
+    padding: 1rem;
     border-radius: 10px;
 }
 
-/* Estilo del contenedor central */
-.form-container {
-    background-color: #A23232; /* Fondo rojo vino */
-    border-radius: 15px;
-    padding: 40px 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    color: #fff;
-    font-family: 'Archivo Black', sans-serif;
+.sidebar h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
 }
 
-/* Títulos del formulario */
-.form-container h2 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    font-weight: bold;
+.sidebar .tags {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-/* Etiquetas y campos del formulario */
-.form-container label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-    text-align: left;
+.sidebar .tags input {
+    margin-right: 0.5rem;
 }
 
-.form-container input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+.sidebar .buttons {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar .buttons .btn {
+    background-color: #A23232;
+    color: white;
+    padding: 0.5rem;
     border: none;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    color: #5A2E2E; /* Texto oscuro */
-    font-style: italic;
-}
-
-.form-container input::placeholder {
-    color: #ccc;
-    font-style: italic;
-}
-
-.form-container button {
-    background-color: #5A2E2E; /* Botón marrón oscuro */
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 20px;
-    width: 100%;
-    font-size: 1rem;
+    border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
 }
 
-.form-container button:hover {
-    background-color: #8C2626; /* Hover efecto */
-}
-
-.form-container p {
-    margin-top: 10px;
+.sidebar .note {
+    margin-top: 1rem;
     font-size: 0.9rem;
-    font-style: italic;
 }
 
-.form-container p a {
-    color: #fff;
-    text-decoration: underline;
+/* Contenido principal */
+.main-content {
+    flex: 3;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Tarjeta de libro */
+.card {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    max-height: 200px;
+}
+
+.card h3 {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.card p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.card .btn {
+    background-color: #A23232;
+    color: white;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.card .heart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
 }
 
 /* Responsividad */
 @media (max-width: 768px) {
-    .content {
+    .container {
         flex-direction: column;
-        text-align: center;
     }
 
-    .buttons {
-        justify-content: center;
+    .main-content {
+        grid-template-columns: 1fr;
     }
 }

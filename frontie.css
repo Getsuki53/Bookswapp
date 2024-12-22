@@ -1,0 +1,139 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fcefe3;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #a92e2e;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+header .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+header .search-bar {
+    display: flex;
+    align-items: center;
+}
+
+header .search-bar input {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+header .search-bar button {
+    padding: 5px 10px;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+header .user-actions button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2em;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+main {
+    display: flex;
+    margin: 20px;
+}
+
+aside {
+    width: 20%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+aside h2 {
+    color: #a92e2e;
+    margin-bottom: 20px;
+}
+
+aside .tags label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+aside .search-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #a92e2e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+aside .note {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 20px;
+}
+
+.results {
+    width: 75%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.book {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.book img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.book h3 {
+    color: #a92e2e;
+    font-size: 1.1em;
+    margin: 10px 0;
+}
+
+.book p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 10px 0;
+}
+
+.book .action-button {
+    padding: 10px 15px;
+    background-color: #a92e2e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.book .action-button:hover {
+    background-color: #871f1f;
+}
