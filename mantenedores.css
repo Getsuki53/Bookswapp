@@ -1,0 +1,169 @@
+/* Reset y configuración general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'HK Grotesk', sans-serif;
+    background-color: #ffeddf; /* Fondo crema */
+    color: #5A2E2E; /* Texto marrón oscuro */
+    display: flex;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la ventana */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #b71c1c; /* Rojo oscuro */
+    color: #fff;
+    position: fixed;
+    height: 100%; /* Asegura que la barra lateral ocupe toda la altura del cuerpo */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 80px; /* Ajusta el ancho del logo */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin: 0 auto; /* Centra el logo */
+}
+
+.sidebar h1 {
+    font-size: 24px;
+    font-family: 'Archivo Black', sans-serif;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    flex-grow: 1; /* Permite que el nav ocupe el espacio disponible */
+}
+
+.sidebar button {
+    background-color: #d32f2f; /* Rojo medio */
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+}
+
+.sidebar button:hover {
+    background-color: #ff6659;
+}
+
+/* Contenido principal */
+.main-content {
+    margin-left: 250px; /* Deja espacio para la barra lateral */
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto; /* Permite el desplazamiento si el contenido es demasiado grande */
+}
+
+.main-content h2 {
+    color: #b71c1c;
+    margin-bottom: 20px;
+}
+
+.main-content p {
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form button {
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-family: 'HK Grotesk', sans-serif;
+}
+
+form button {
+    background-color: #b71c1c; /* Rojo oscuro */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #d32f2f; /* Rojo medio */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+table td form {
+    display: inline;
+}
+
+table td form input[type="text"],
+table td form input[type="email"] {
+    width: auto;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+table td form button {
+    padding: 5px 10px; /* Ajustar el tamaño de los botones */
+    background-color: #b71c1c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px; /* Ajustar el tamaño de la fuente */
+}
+
+table td form button:hover {
+    background-color: #d32f2f;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 10px;
+    }
+}
