@@ -82,7 +82,7 @@
                     <h2>Regístrate en BookSwap</h2>
                     <!-- Contenido adicional -->
                 </div>
-                <form action="../../procesos/proceso_registrar.php" method="POST" enctype="multipart/form-data">
+                <form action="../../procesos/proceso_registro.php" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="column">
                             <label for="nombre">Nombre</label>

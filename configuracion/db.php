@@ -1,7 +1,7 @@
 <?php
 
 $servername = "localhost";
-$username = "yayho19"; // El usuario predeterminado en XAMPP
+$username = "yayoh19"; // El usuario predeterminado en XAMPP
 $password = "Metano1_Etano2"; // La contraseña predeterminada en XAMPP es vacía
 $dbname = "bookswap"; // Cambia por el nombre de tu base de datos
 

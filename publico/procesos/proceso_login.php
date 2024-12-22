@@ -1,6 +1,6 @@
 <?php
 // Incluir la conexión a la base de datos
-include('../../config/db.php');
+include('../../configuracion/db.php');
 
 // Verificar si el formulario fue enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['correo'] = $correo;
 
             // Redirigir al home.php
-            header("Location: ../vistas/home.php");
+            header("Location: ../vistas/vista_lector/home.php");
             exit();
         }
         else

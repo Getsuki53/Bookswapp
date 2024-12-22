@@ -1,5 +1,5 @@
 <?php
-include('../../config/db.php');
+include('../../configuracion/db.php');
 
 // Verificar si el formulario fue enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($conn->query($sql_lector) === TRUE) {
             echo "Usuario registrado exitosamente.";
-            header("Location: ../views/login.php");
+            header("Location: ../vistas/control_acceso/login.php");
             exit();
         } else {
             // Si hay error al insertar en Lector, se elimina el usuario recién creado
