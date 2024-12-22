@@ -51,6 +51,7 @@ $resultado = $conexion->query("SELECT * FROM etiqueta WHERE Oculto = 1");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mantenedor de Etiquetas</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mantenedores.css">
 <body>
     <div class="sidebar">
         <div class="logo-container">
