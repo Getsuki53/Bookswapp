@@ -1,10 +1,11 @@
 <?php
+// Inicia sesión y conecta a la base de datos
 session_start();
-include('db.php'); // Asegúrate de incluir la conexión a la base de datos
+include('db.php');
 
-// Verificar si el formulario fue enviado
+// Verifica si el formulario fue enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Recibir los datos del formulario
+    // Recibe los datos del formulario
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
     $correo = $_POST['correo'];
@@ -12,29 +13,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $comuna = $_POST['comuna'];
     $contrasena = $_POST['password'];
 
-    // Encriptar la contraseña antes de guardarla
-    $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
+    // Elimina la encriptación de la contraseña
+    // $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
 
-    // Insertar en la tabla Usuario
+    // Inserta en la tabla Usuario
     $sql_usuario = "INSERT INTO Usuario (usu_mail, usu_pass, T_usuario, Oculto)
-                    VALUES ('$correo', '$contrasena_hash', 'Lector', 1)";
-
-        // Ahora que el usuario está en la tabla Usuario, insertamos en Lector
-        $sql_lector = "INSERT INTO Lector (usu_nom, usu_apellido, usu_mail, username, usu_comuna)
+                    VALUES ('$correo', '$contrasena', 'Lector', 1)";
+    if ($conn->query($sql_usuario) === TRUE) {
+        // Inserta en la tabla Lector
+        $sql_lector = "INSERT INTO Lector (usu_nom, usu_apellido, usu_mail, usu_username, usu_comuna)
                        VALUES ('$nombre', '$apellido', '$correo', '$username', '$comuna')";
-
         if ($conn->query($sql_lector) === TRUE) {
-            echo "Usuario registrado exitosamente.";
+            // Redirige al login
             header("Location: login.php");
             exit();
         } else {
-            echo "Error al registrar en Lector: " . $conn->error;
+            echo "Error al registrar el usuario en Lector: " . $conn->error;
         }
     } else {
         echo "Error al registrar el usuario en Usuario: " . $conn->error;
     }
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -87,5 +87,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </main>
 </body>
 </html>
-
-

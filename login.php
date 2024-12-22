@@ -5,29 +5,24 @@ include('db.php'); // Archivo de conexión a la base de datos
 
 // Verificar si el formulario fue enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Recibir los datos del formulario
     $correo = $_POST['correo'];
-    $password = $_POST['password'];
+    $contrasena = $_POST['password'];
 
-    // Consultar si el correo existe en la base de datos
-    $sql = "SELECT * FROM Usuario WHERE usu_correo = '$correo'";
-    $result = $conn->query($sql);
+    // Consulta para verificar las credenciales
+    $sql = $conn->prepare("SELECT * FROM Usuario WHERE usu_mail = ? AND usu_pass = ?");
+    $sql->bind_param("ss", $correo, $contrasena);
+    $sql->execute();
+    $result = $sql->get_result();
 
-    // Si el correo existe
     if ($result->num_rows > 0) {
-        $usuario = $result->fetch_assoc();
-        // Verificar la contraseña
-        if (password_verify($password, $usuario['usu_contrasena'])) {
-            // Contraseña correcta, iniciar sesión
-            $_SESSION['usuario_id'] = $usuario['usu_id']; // Guardar el ID del usuario
-            $_SESSION['usuario_nombre'] = $usuario['usu_nombre']; // Guardar el nombre
-            header("Location: index.php"); // Redirigir a la página principal
-            exit();
-        } else {
-            echo "Contraseña incorrecta.";
-        }
+        // Credenciales correctas
+        echo "Inicio de sesión exitoso";
+        // Redirige a la página principal
+        header("Location: home.php");
+        exit();
     } else {
-        echo "No se encontró el usuario con ese correo.";
+        // Credenciales incorrectas
+        echo "Correo o contraseña incorrectos";
     }
 }
 ?>
