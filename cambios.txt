@@ -1,0 +1,70 @@
+* Se cambio la estructura del documento:
+
+├── cambios.txt
+├── configuracion
+│   └── db.php
+├── publico
+│   ├── index.php
+│   ├── procesos
+│   │   ├── proceso_login.php
+│   │   ├── proceso_registro_libros.php
+│   │   └── proceso_registro.php
+│   ├── recursos
+│   │   ├── css
+│   │   │   ├── busqueda_usuarios.css
+│   │   │   ├── chat.css
+│   │   │   ├── home.css
+│   │   │   ├── login.css
+│   │   │   ├── registro.css
+│   │   │   ├── registro_libros.css
+│   │   │   └── styles.css
+│   │   ├── imagenes
+│   │   │   ├── 12-removebg-preview.png
+│   │   │   ├── BookSwap-removebg-preview.png
+│   │   │   ├── mail_icon.png
+│   │   │   ├── notificacion.png
+│   │   │   ├── search_icon.png
+│   │   │   ├── Tipos-de-libros.jpg
+│   │   │   └── user_icon.png
+│   │   ├── js
+│   │   └── mantenedores.css
+│   └── vistas
+│       ├── control_acceso
+│       │   ├── login.php
+│       │   ├── logout.php
+│       │   └── registrar.php
+│       ├── vista_lector
+│       │   ├── busqueda
+│       │   │   ├── buscar_etiqueta.php
+│       │   │   ├── buscar_libro.php
+│       │   │   └── buscar_usuario.php
+│       │   ├── gestion_libros
+│       │   │   └── registro_libros.php
+│       │   ├── home.php
+│       │   ├── intercambio
+│       │   │   └── chat.php
+│       │   └── perfil
+│       │       ├── editar_perfil.php
+│       │       └── perfil.php
+│       └── vista_moderador
+│           └── mantenedor_tablas_basicas
+│               ├── mantenedor_comuna.php
+│               ├── mantenedor_estado.php
+│               ├── mantenedor_etiqueta.php
+│               ├── mantenedor_idioma.php
+│               ├── mantenedor_moderador.php
+│               ├── mantenedor_principal.php
+│               └── mantenedor_tusuarios.php
+├── README.md
+└── xampp
+    └── xampp-linux-x64-8.2.12-0-installer.run
+
+# Ignore el directorio xampp, es para los que usan linux y no usan el instalador.
+
+* Se cambiaron las extensiones .html por .php para seguir los estándares.
+
+* Se cambió register.php a proceso_registro.php para seguir los estándares.
+
+* Se adaptó el orden de todos los archivos para facilitar su lectura.
+
+* Se añadió documentación a todos los archivos.

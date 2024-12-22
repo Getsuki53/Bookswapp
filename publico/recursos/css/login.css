@@ -1,0 +1,24 @@
+
+
+.fondo {
+    flex: 1;
+    width: 100%; 
+    max-width: 100%;
+    height: auto;
+    background-image: url('../images/Tipos-de-libros.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-color: #fff; */
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+    background-color: #A23232; /* Color rojo vino */
+    display: flex;
+    color: #ffffff;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}

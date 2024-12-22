@@ -1,0 +1,103 @@
+body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .cabecera {
+            background-color: #b71c1c;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .formulario {
+            display: flex;
+            background-color: #b71c1c;
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .imagen-container {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .imagen-container input {
+            display: none;
+        }
+
+        .imagen-container label {
+            display: block;
+            background-color: #fff;
+            color: #b71c1c;
+            border: 2px dashed #b71c1c;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .imagen-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .formulario-content {
+            width: 60%;
+        }
+
+        .formulario-content label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .formulario-content input,
+        .formulario-content select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .formulario-content button {
+            width: 100%;
+            padding: 10px;
+            background-color: #f44336;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .formulario-content button:hover {
+            background-color: #d32f2f;
+        }
