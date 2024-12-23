@@ -39,7 +39,7 @@ if (isset($_GET['accion']) && $_GET['accion'] === 'imagen') {
     } else {
         // Mostrar una imagen por defecto si no se encuentra
         header("Content-Type: image/png");
-        readfile("default.png"); // Asegúrate de tener esta imagen en tu servidor
+        readfile("default.png"); 
     }
 
     // Finalizar el script para no seguir ejecutando
