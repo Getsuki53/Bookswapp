@@ -31,7 +31,10 @@
 
                     <!-- Campo para contraseña -->
                     <label for="password">Contraseña</label>
-                    <input type="password" id="password" name="password" placeholder="" required>
+                    <input type="password" id="password" name="password" required>
+                    <script>
+                        document.getElementById("password").value="";
+                    </script>
 
                     <!-- Botón de envío -->
                     <button type="submit">Inicia Sesión</button>

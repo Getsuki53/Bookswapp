@@ -111,10 +111,20 @@
                     <div class="row">
                         <div class="column">
                             <label for="password">Contraseña</label>
-                            <input type="password" id="password" name="password" value="<?php echo htmlspecialchars($password); ?>" placeholder="" class="<?php echo !empty($errorPassword) ? 'campo-error' : ''; ?>" required>
+                            <input type="password" id="password" name="password" 
+                                 value="<?php echo !empty($password) ? htmlspecialchars($password) : ''; ?>" 
+                                 class="<?php echo !empty($errorPassword) ? 'campo-error' : ''; ?>" 
+                                 required autocomplete="new-password">
                             <?php if (!empty($errorPassword)): ?>
                                 <p class="mensaje-error"><?php echo $errorPassword; ?></p>
                             <?php endif; ?>
+                            <script>
+                                // Borra el valor solo si el campo está vacío (esto previene la sobrescritura no deseada)
+                                document.getElementById("password").addEventListener("focus", function() {
+                                    if (this.value === "")
+                                        this.value = "";
+                                });
+                            </script>
                         </div>
 
                         <div class="column">
@@ -124,14 +134,36 @@
                                 <p class="mensaje-error"><?php echo $errorCPassword; ?></p>
                             <?php endif; ?>
                         </div>
-
                     </div>
 
                     <div class="row">
+                        <div class"column">
+                            <label for="comuna">Comuna</label>
+                            <select name="comuna" id="comuna" required>
+                            <option value="">Selecciona una comuna</option>
+                            <?php
+                                include('../../../configuracion/db.php');
+                                $sql_comunas = "SELECT * FROM `Comuna`";
+                                $result_comunas = $conn->query($sql_comunas);
+                                if ($result_comunas->num_rows > 0)
+                                {
+                                    while ($row = $result_comunas->fetch_assoc())
+                                        echo '<option value="' . $row['Com_nom'] . '">' . $row['Com_nom'] . '</option>';
+                                }
+                                else
+                                    echo '<option value="">No hay comunas disponibles</option>';
+                            ?>
+                            </select>
+                        </div>
+                         <div class"column">
+                            <label for="imagen">Foto de perfil</label>
+                            <input type="file" name="imagen" id="imagen" accept="image/*">
+                        </div>
+                    </div>
+
                         <div class="column">
                             <button type="submit" class="btn-submit">Registrar</button>
                         </div>
-                    </div>
                 </form>
                 <div class="form-footer">
                     ¿Ya tienes una cuenta? <a href="login.php"><i>Inicia sesión aquí</i></a>

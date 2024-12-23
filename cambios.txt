@@ -14,6 +14,7 @@
 │   │   │   ├── busqueda_usuarios.css
 │   │   │   ├── chat.css
 │   │   │   ├── home.css
+│   │   │   ├── mantenedores.css
 │   │   │   ├── login.css
 │   │   │   ├── registro.css
 │   │   │   ├── registro_libros.css
@@ -27,7 +28,6 @@
 │   │   │   ├── Tipos-de-libros.jpg
 │   │   │   └── user_icon.png
 │   │   ├── js
-│   │   └── mantenedores.css
 │   └── vistas
 │       ├── control_acceso
 │       │   ├── login.php
@@ -56,8 +56,6 @@
 │               ├── mantenedor_principal.php
 │               └── mantenedor_tusuarios.php
 ├── README.md
-└── xampp
-    └── xampp-linux-x64-8.2.12-0-installer.run
 
 # Ignore el directorio xampp, es para los que usan linux y no usan el instalador.
 
