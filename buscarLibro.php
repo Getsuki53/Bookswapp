@@ -1,47 +1,23 @@
 <?php
-// Inicia sesión y conecta a la base de datos
-session_start();
-include('db.php');
+// filepath: /c:/xampp/htdocs/Bookswap/buscarLibro.php
 
+function buscarLibro($conn, $titulo = '') {
+    if (!empty($titulo)) {
+        $titulo = $conn->real_escape_string($titulo);
 
-// Obtener la etiqueta buscada
-if (isset($_GET['titulo'])) {
-    $titulo = $conn->real_escape_string($_GET['titulo']);
-
-    // Consultar libros que contengan la etiqueta
-    $sql = "SELECT * FROM libro WHERE libro.Lib_nom='$titulo' AND libro.Oculto=1";
-    $result = $conn->query($sql);
-
-    // Verificar si hay resultados
-    if ($result->num_rows > 0) {
-        // Mostrar los datos de cada libro
-        while($row = $result->fetch_assoc()) {
-            echo "<div class='card'>";
-            // Verificar si la imagen está presente
-            if (!empty($row['Lib_imagen'])) {
-                echo '<img src="' . $row['Lib_imagen'] . '" alt="Imagen del libro" class="book-img" />';
-            } else {
-                echo '<img src="placeholder.jpg" alt="Imagen no disponible" class="book-img" />';
-            }
-            echo "<h3 class='book-title'>" . $row['Lib_nom'] . "</h3>";
-            echo "<p class='book-uploader'>Subido por " . $row['Lib_Usu_correo'] . "</p>";
-            echo "<form method='POST' action='homee.php' class='form'>";
-            echo "<input type='hidden' name='lib_cod' value='" . $row['Lib_cod'] . "'>";
-            echo "<button type='submit' class='btn'>Solicitar</button>";
-            echo "</form>";
-            echo "</div>";
-        }
+        // Consultar libros que contengan el título
+        $sql_buscar = "SELECT libro.*, lector.Lec_mail FROM libro JOIN lector ON libro.Lib_usu_correo = lector.Lec_mail WHERE libro.Lib_nom LIKE ? AND libro.Oculto = 1";
+        $stmt_buscar = $conn->prepare($sql_buscar);
+        $titulo_param = "%$titulo%";
+        $stmt_buscar->bind_param("s", $titulo_param);
+        $stmt_buscar->execute();
+        $result_buscar = $stmt_buscar->get_result();
+        return $result_buscar->fetch_all(MYSQLI_ASSOC);
     } else {
-        echo "<p>No se encontraron libros con el nombre: " . $titulo . "</p>";
+        // Consulta para obtener todos los libros
+        $sql = "SELECT libro.*, lector.Lec_mail FROM libro JOIN lector ON libro.Lib_usu_correo = lector.Lec_mail WHERE libro.Oculto = 1";
+        $result = $conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
-} 
-
-$conn->close();
+}
 ?>
-
-<form method="GET" action="buscarLibro.php">
-    <label for="titulo">Buscar por titulo:</label>
-    <input type="text" id="etiqueta" name="titulo" placeholder="Ejemplo: En el camino" required>
-    <button type="submit">Buscar</button>
-</form>
-

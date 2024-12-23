@@ -1,0 +1,164 @@
+/* Reset y configuración general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+body {
+    background-color: #FCECE1; /* Fondo crema */
+    color: #5A2E2E; /* Color marrón oscuro */
+}
+
+/* Estilo del encabezado */
+header {
+    background-color: #A23232; /* Color rojo vino */
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+header .icons img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+/* Barra de búsqueda */
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.search-input {
+    width: 80%;
+    padding: 0.5rem;
+    border: 2px solid #A23232;
+    border-radius: 5px;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+/* Barra lateral */
+.sidebar {
+    flex: 1;
+    background-color: #F8D4D1;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.sidebar h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.sidebar .tags {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar .tags input {
+    margin-right: 0.5rem;
+}
+
+.sidebar .buttons {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar .buttons .btn {
+    background-color: #A23232;
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sidebar .note {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+/* Contenido principal */
+.main-content {
+    flex: 3;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Tarjeta de libro */
+.card {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    max-height: 200px;
+}
+
+.card h3 {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.card p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.card .btn {
+    background-color: #A23232;
+    color: white;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.card .heart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
