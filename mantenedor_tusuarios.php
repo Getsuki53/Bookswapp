@@ -1,8 +1,46 @@
 <?php
-// Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "", "bookswap");
+// Función para crear un tipo de usuario
+function crearTipoUsuario($conexion, $nombre) {
+    $nombre = $conexion->real_escape_string($nombre);
 
-// Manejar errores de conexión
+    // Verificar si el tipo de usuario ya existe
+    $resultado = $conexion->query("SELECT * FROM t_usuario WHERE Tus_Tipo_usu = '$nombre'");
+    if ($resultado->num_rows > 0) {
+        // Si existe, verificar si está oculto
+        $fila = $resultado->fetch_assoc();
+        if ($fila['Oculto'] == 0) {
+            // Si está oculto, actualizar su estado a visible
+            $conexion->query("UPDATE t_usuario SET Oculto = 1 WHERE Tus_Tipo_usu = '$nombre'");
+        } else {
+            // Si ya está visible, mostrar un mensaje de error
+            echo "El tipo de usuario ya existe y está visible.";
+        }
+    } else {
+        // Si no existe, insertar nuevo tipo de usuario con estado visible (Oculto = 1)
+        $conexion->query("INSERT INTO t_usuario (Tus_Tipo_usu, Oculto) VALUES ('$nombre', 1)");
+    }
+}
+
+// Función para editar un tipo de usuario
+function editarTipoUsuario($conexion, $nombre_original, $nombre) {
+    $nombre_original = $conexion->real_escape_string($nombre_original);
+    $nombre = $conexion->real_escape_string($nombre);
+    
+    // Actualizar nombre de tipo de usuario
+    $conexion->query("UPDATE t_usuario SET Tus_Tipo_usu = '$nombre' WHERE Tus_Tipo_usu = '$nombre_original'");
+}
+
+// Función para eliminar un tipo de usuario (marcarlo como oculto)
+function eliminarTipoUsuario($conexion, $nombre) {
+    $nombre = $conexion->real_escape_string($nombre);
+    
+    // Cambiar estado a oculto (Oculto = 0) en lugar de eliminar
+    $conexion->query("UPDATE t_usuario SET Oculto = 0 WHERE Tus_Tipo_usu = '$nombre'");
+}
+
+// Conexión a la base de datos
+$conexion = new mysqli("localhost", "root", "Patita05$", "bookswap");
+
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
@@ -10,33 +48,11 @@ if ($conexion->connect_error) {
 // Procesar operaciones
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['crear']) && !empty($_POST['nombre'])) {
-        $nombre = $conexion->real_escape_string($_POST['nombre']);
-        
-        // Verificar si el tipo de usuario ya existe
-        $resultado = $conexion->query("SELECT * FROM t_usuario WHERE Tus_Tipo_usu = '$nombre'");
-        if ($resultado->num_rows > 0) {
-            // Si existe, verificar si está oculto
-            $fila = $resultado->fetch_assoc();
-            if ($fila['Oculto'] == 0) {
-                // Si está oculto, actualizar su estado a visible
-                $conexion->query("UPDATE t_usuario SET Oculto = 1 WHERE Tus_Tipo_usu = '$nombre'");
-            } else {
-                // Si ya está visible, mostrar un mensaje de error
-                echo "El tipo de usuario ya existe y está visible.";
-            }
-        } else {
-            // Si no existe, insertar nuevo tipo de usuario con estado visible (Oculto = 1)
-            $conexion->query("INSERT INTO t_usuario (Tus_Tipo_usu, Oculto) VALUES ('$nombre', 1)");
-        }
+        crearTipoUsuario($conexion, $_POST['nombre']);
     } elseif (isset($_POST['editar']) && !empty($_POST['nombre_original']) && !empty($_POST['nombre'])) {
-        $nombre_original = $conexion->real_escape_string($_POST['nombre_original']);
-        $nombre = $conexion->real_escape_string($_POST['nombre']);
-        // Actualizar nombre de tipo de usuario
-        $conexion->query("UPDATE t_usuario SET Tus_Tipo_usu = '$nombre' WHERE Tus_Tipo_usu = '$nombre_original'");
+        editarTipoUsuario($conexion, $_POST['nombre_original'], $_POST['nombre']);
     } elseif (isset($_POST['eliminar']) && !empty($_POST['nombre'])) {
-        $nombre = $conexion->real_escape_string($_POST['nombre']);
-        // Cambiar estado a oculto (Oculto = 0) en lugar de eliminar
-        $conexion->query("UPDATE t_usuario SET Oculto = 0 WHERE Tus_Tipo_usu = '$nombre'");
+        eliminarTipoUsuario($conexion, $_POST['nombre']);
     }
 }
 
@@ -49,7 +65,7 @@ $resultado = $conexion->query("SELECT * FROM t_usuario WHERE Oculto = 1");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mantenedor de Tipos de Usuario</title>
+    <title>Mantenedor de Tipos de Usuarios</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mantenedores.css">
 </head>
@@ -63,7 +79,10 @@ $resultado = $conexion->query("SELECT * FROM t_usuario WHERE Oculto = 1");
         </nav>
     </div>
     <div class="main-content">
-        <h2>Mantenedor de Tipos de Usuario</h2>
+        <header class="main-header">
+            <h2>Mantenedor de Tipos de Usuarios</h2>
+        </header>
+        <!-- Contenido del mantenedor de tipos de usuarios -->
         <form action="mantenedor_tusuarios.php" method="POST">
             <input type="text" name="nombre" placeholder="Nombre del tipo de usuario" required>
             <button type="submit" name="crear">Crear</button>
