@@ -1,8 +1,46 @@
 <?php
-// Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "", "bookswap");
+// Función para crear una etiqueta
+function crearEtiqueta($conexion, $nombre) {
+    $nombre = $conexion->real_escape_string($nombre);
 
-// Manejar errores de conexión
+    // Verificar si la etiqueta ya existe
+    $resultado = $conexion->query("SELECT * FROM etiqueta WHERE Etiq_nom = '$nombre'");
+    if ($resultado->num_rows > 0) {
+        // Si existe, verificar si está oculta
+        $fila = $resultado->fetch_assoc();
+        if ($fila['Oculto'] == 0) {
+            // Si está oculta, actualizar su estado a visible
+            $conexion->query("UPDATE etiqueta SET Oculto = 1 WHERE Etiq_nom = '$nombre'");
+        } else {
+            // Si ya está visible, mostrar un mensaje de error
+            echo "La etiqueta ya existe y está visible.";
+        }
+    } else {
+        // Si no existe, insertar nueva etiqueta con estado visible (Oculto = 1)
+        $conexion->query("INSERT INTO etiqueta (Etiq_nom, Oculto) VALUES ('$nombre', 1)");
+    }
+}
+
+// Función para editar una etiqueta
+function editarEtiqueta($conexion, $nombre_original, $nombre) {
+    $nombre_original = $conexion->real_escape_string($nombre_original);
+    $nombre = $conexion->real_escape_string($nombre);
+    
+    // Actualizar nombre de la etiqueta
+    $conexion->query("UPDATE etiqueta SET Etiq_nom = '$nombre' WHERE Etiq_nom = '$nombre_original'");
+}
+
+// Función para eliminar una etiqueta (marcarla como oculta)
+function eliminarEtiqueta($conexion, $nombre) {
+    $nombre = $conexion->real_escape_string($nombre);
+    
+    // Cambiar estado a oculto (Oculto = 0) en lugar de eliminar
+    $conexion->query("UPDATE etiqueta SET Oculto = 0 WHERE Etiq_nom = '$nombre'");
+}
+
+// Conexión a la base de datos
+$conexion = new mysqli("localhost", "root", "Patita05$", "bookswap");
+
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
@@ -10,33 +48,11 @@ if ($conexion->connect_error) {
 // Procesar operaciones
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['crear']) && !empty($_POST['nombre'])) {
-        $nombre = $conexion->real_escape_string($_POST['nombre']);
-        
-        // Verificar si la etiqueta ya existe
-        $resultado = $conexion->query("SELECT * FROM etiqueta WHERE Etiq_nom = '$nombre'");
-        if ($resultado->num_rows > 0) {
-            // Si existe, verificar si está oculta
-            $fila = $resultado->fetch_assoc();
-            if ($fila['Oculto'] == 0) {
-                // Si está oculta, actualizar su estado a visible
-                $conexion->query("UPDATE etiqueta SET Oculto = 1 WHERE Etiq_nom = '$nombre'");
-            } else {
-                // Si ya está visible, mostrar un mensaje de error
-                echo "La etiqueta ya existe y está visible.";
-            }
-        } else {
-            // Si no existe, insertar nueva etiqueta con estado visible (Oculto = 1)
-            $conexion->query("INSERT INTO etiqueta (Etiq_nom, Oculto) VALUES ('$nombre', 1)");
-        }
+        crearEtiqueta($conexion, $_POST['nombre']);
     } elseif (isset($_POST['editar']) && !empty($_POST['nombre_original']) && !empty($_POST['nombre'])) {
-        $nombre_original = $conexion->real_escape_string($_POST['nombre_original']);
-        $nombre = $conexion->real_escape_string($_POST['nombre']);
-        // Actualizar nombre de etiqueta
-        $conexion->query("UPDATE etiqueta SET Etiq_nom = '$nombre' WHERE Etiq_nom = '$nombre_original'");
+        editarEtiqueta($conexion, $_POST['nombre_original'], $_POST['nombre']);
     } elseif (isset($_POST['eliminar']) && !empty($_POST['nombre'])) {
-        $nombre = $conexion->real_escape_string($_POST['nombre']);
-        // Cambiar estado a oculto (Oculto = 0) en lugar de eliminar
-        $conexion->query("UPDATE etiqueta SET Oculto = 0 WHERE Etiq_nom = '$nombre'");
+        eliminarEtiqueta($conexion, $_POST['nombre']);
     }
 }
 
@@ -52,6 +68,7 @@ $resultado = $conexion->query("SELECT * FROM etiqueta WHERE Oculto = 1");
     <title>Mantenedor de Etiquetas</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mantenedores.css">
+</head>
 <body>
     <div class="sidebar">
         <div class="logo-container">
@@ -62,7 +79,9 @@ $resultado = $conexion->query("SELECT * FROM etiqueta WHERE Oculto = 1");
         </nav>
     </div>
     <div class="main-content">
-        <h2>Mantenedor de Etiquetas</h2>
+        <header class="main-header">
+            <h2>Mantenedor de Etiquetas</h2>
+        </header>
         <form action="mantenedor_eti.php" method="POST">
             <input type="text" name="nombre" placeholder="Nombre de la etiqueta" required>
             <button type="submit" name="crear">Crear</button>
