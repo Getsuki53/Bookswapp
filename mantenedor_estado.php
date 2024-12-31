@@ -1,8 +1,46 @@
 <?php
-// Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "", "bookswap");
+// Función para crear un estado
+function crearEstado($conexion, $nombre) {
+    $nombre = $conexion->real_escape_string($nombre);
 
-// Manejar errores de conexión
+    // Verificar si el estado ya existe
+    $resultado = $conexion->query("SELECT * FROM estado WHERE Est_nom = '$nombre'");
+    if ($resultado->num_rows > 0) {
+        // Si existe, verificar si está oculto
+        $fila = $resultado->fetch_assoc();
+        if ($fila['Oculto'] == 0) {
+            // Si está oculto, actualizar su estado a visible
+            $conexion->query("UPDATE estado SET Oculto = 1 WHERE Est_nom = '$nombre'");
+        } else {
+            // Si ya está visible, mostrar un mensaje de error
+            echo "El estado ya existe y está visible.";
+        }
+    } else {
+        // Si no existe, insertar nuevo estado con estado visible (Oculto = 1)
+        $conexion->query("INSERT INTO estado (Est_nom, Oculto) VALUES ('$nombre', 1)");
+    }
+}
+
+// Función para editar un estado
+function editarEstado($conexion, $nombre_original, $nombre) {
+    $nombre_original = $conexion->real_escape_string($nombre_original);
+    $nombre = $conexion->real_escape_string($nombre);
+    
+    // Actualizar nombre del estado
+    $conexion->query("UPDATE estado SET Est_nom = '$nombre' WHERE Est_nom = '$nombre_original'");
+}
+
+// Función para eliminar un estado (marcarlo como oculto)
+function eliminarEstado($conexion, $nombre) {
+    $nombre = $conexion->real_escape_string($nombre);
+    
+    // Cambiar estado a oculto (Oculto = 0) en lugar de eliminar
+    $conexion->query("UPDATE estado SET Oculto = 0 WHERE Est_nom = '$nombre'");
+}
+
+// Conexión a la base de datos
+$conexion = new mysqli("localhost", "root", "Patita05$", "bookswap");
+
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
@@ -10,33 +48,11 @@ if ($conexion->connect_error) {
 // Procesar operaciones
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['crear']) && !empty($_POST['nombre'])) {
-        $nombre = $conexion->real_escape_string($_POST['nombre']);
-        
-        // Verificar si el estado ya existe
-        $resultado = $conexion->query("SELECT * FROM estado WHERE Est_nom = '$nombre'");
-        if ($resultado->num_rows > 0) {
-            // Si existe, verificar si está oculto
-            $fila = $resultado->fetch_assoc();
-            if ($fila['Oculto'] == 0) {
-                // Si está oculto, actualizar su estado a visible
-                $conexion->query("UPDATE estado SET Oculto = 1 WHERE Est_nom = '$nombre'");
-            } else {
-                // Si ya está visible, mostrar un mensaje de error
-                echo "El estado ya existe y está visible.";
-            }
-        } else {
-            // Si no existe, insertar nuevo estado con estado visible (Oculto = 1)
-            $conexion->query("INSERT INTO estado (Est_nom, Oculto) VALUES ('$nombre', 1)");
-        }
+        crearEstado($conexion, $_POST['nombre']);
     } elseif (isset($_POST['editar']) && !empty($_POST['nombre_original']) && !empty($_POST['nombre'])) {
-        $nombre_original = $conexion->real_escape_string($_POST['nombre_original']);
-        $nombre = $conexion->real_escape_string($_POST['nombre']);
-        // Actualizar nombre de estado
-        $conexion->query("UPDATE estado SET Est_nom = '$nombre' WHERE Est_nom = '$nombre_original'");
+        editarEstado($conexion, $_POST['nombre_original'], $_POST['nombre']);
     } elseif (isset($_POST['eliminar']) && !empty($_POST['nombre'])) {
-        $nombre = $conexion->real_escape_string($_POST['nombre']);
-        // Cambiar estado a oculto (Oculto = 0) en lugar de eliminar
-        $conexion->query("UPDATE estado SET Oculto = 0 WHERE Est_nom = '$nombre'");
+        eliminarEstado($conexion, $_POST['nombre']);
     }
 }
 
@@ -63,7 +79,10 @@ $resultado = $conexion->query("SELECT * FROM estado WHERE Oculto = 1");
         </nav>
     </div>
     <div class="main-content">
-        <h2>Mantenedor de Estado</h2>
+        <header class="main-header">
+            <h2>Mantenedor de Estado</h2>
+        </header>
+        <!-- Contenido del mantenedor de estado -->
         <form action="mantenedor_estado.php" method="POST">
             <input type="text" name="nombre" placeholder="Nombre del estado" required>
             <button type="submit" name="crear">Crear</button>
