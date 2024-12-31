@@ -39,7 +39,7 @@ if (isset($_GET['accion']) && $_GET['accion'] === 'imagen') {
     } else {
         // Mostrar una imagen por defecto si no se encuentra
         header("Content-Type: image/png");
-        readfile("default.png"); 
+        readfile("default.png"); // Asegúrate de tener esta imagen en tu servidor
     }
 
     // Finalizar el script para no seguir ejecutando
@@ -79,7 +79,7 @@ $resultado_lista_deseos = $conexion->query($query_lista_deseos);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="perfil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
