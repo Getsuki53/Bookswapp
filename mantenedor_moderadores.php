@@ -1,8 +1,46 @@
 <?php
-// Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "", "bookswap");
+// Función para crear un moderador
+function crearModerador($conexion, $correo) {
+    $correo = $conexion->real_escape_string($correo);
 
-// Manejar errores de conexión
+    // Verificar si el moderador ya existe
+    $resultado = $conexion->query("SELECT * FROM moderador WHERE Mod_mail = '$correo'");
+    if ($resultado->num_rows > 0) {
+        // Si existe, verificar si está oculto
+        $fila = $resultado->fetch_assoc();
+        if ($fila['Oculto'] == 0) {
+            // Si está oculto, actualizar su estado a visible
+            $conexion->query("UPDATE moderador SET Oculto = 1 WHERE Mod_mail = '$correo'");
+        } else {
+            // Si ya está visible, mostrar un mensaje de error
+            echo "El moderador ya existe y está visible.";
+        }
+    } else {
+        // Si no existe, insertar nuevo moderador con estado visible (Oculto = 1)
+        $conexion->query("INSERT INTO moderador (Mod_mail, Oculto) VALUES ('$correo', 1)");
+    }
+}
+
+// Función para editar un moderador
+function editarModerador($conexion, $correo_original, $correo) {
+    $correo_original = $conexion->real_escape_string($correo_original);
+    $correo = $conexion->real_escape_string($correo);
+    
+    // Actualizar correo del moderador
+    $conexion->query("UPDATE moderador SET Mod_mail = '$correo' WHERE Mod_mail = '$correo_original'");
+}
+
+// Función para eliminar un moderador (marcarlo como oculto)
+function eliminarModerador($conexion, $correo) {
+    $correo = $conexion->real_escape_string($correo);
+    
+    // Cambiar estado a oculto (Oculto = 0) en lugar de eliminar
+    $conexion->query("UPDATE moderador SET Oculto = 0 WHERE Mod_mail = '$correo'");
+}
+
+// Conexión a la base de datos
+$conexion = new mysqli("localhost", "root", "Patita05$", "bookswap");
+
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
@@ -10,33 +48,11 @@ if ($conexion->connect_error) {
 // Procesar operaciones
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['crear']) && !empty($_POST['correo'])) {
-        $correo = $conexion->real_escape_string($_POST['correo']);
-        
-        // Verificar si el moderador ya existe
-        $resultado = $conexion->query("SELECT * FROM moderador WHERE Mod_mail = '$correo'");
-        if ($resultado->num_rows > 0) {
-            // Si existe, verificar si está oculto
-            $fila = $resultado->fetch_assoc();
-            if ($fila['Oculto'] == 0) {
-                // Si está oculto, actualizar su estado a visible
-                $conexion->query("UPDATE moderador SET Oculto = 1 WHERE Mod_mail = '$correo'");
-            } else {
-                // Si ya está visible, mostrar un mensaje de error
-                echo "El moderador ya existe y está visible.";
-            }
-        } else {
-            // Si no existe, insertar nuevo moderador con estado visible (Oculto = 1)
-            $conexion->query("INSERT INTO moderador (Mod_mail, Oculto) VALUES ('$correo', 1)");
-        }
+        crearModerador($conexion, $_POST['correo']);
     } elseif (isset($_POST['editar']) && !empty($_POST['correo_original']) && !empty($_POST['correo'])) {
-        $correo_original = $conexion->real_escape_string($_POST['correo_original']);
-        $correo = $conexion->real_escape_string($_POST['correo']);
-        // Actualizar correo de moderador
-        $conexion->query("UPDATE moderador SET Mod_mail = '$correo' WHERE Mod_mail = '$correo_original'");
+        editarModerador($conexion, $_POST['correo_original'], $_POST['correo']);
     } elseif (isset($_POST['eliminar']) && !empty($_POST['correo'])) {
-        $correo = $conexion->real_escape_string($_POST['correo']);
-        // Cambiar estado a oculto (Oculto = 0) en lugar de eliminar
-        $conexion->query("UPDATE moderador SET Oculto = 0 WHERE Mod_mail = '$correo'");
+        eliminarModerador($conexion, $_POST['correo']);
     }
 }
 
@@ -63,7 +79,9 @@ $resultado = $conexion->query("SELECT * FROM moderador WHERE Oculto = 1");
         </nav>
     </div>
     <div class="main-content">
-        <h2>Mantenedor de Moderadores</h2>
+        <header class="main-header">
+            <h2>Mantenedor de Moderadores</h2>
+        </header>
         <form action="mantenedor_moderadores.php" method="POST">
             <input type="email" name="correo" placeholder="Correo del moderador" required>
             <button type="submit" name="crear">Crear</button>
