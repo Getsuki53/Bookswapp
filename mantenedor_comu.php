@@ -1,8 +1,46 @@
 <?php
-// Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "", "bookswap");
+// Función para crear una comuna
+function crearComuna($conexion, $nombre) {
+    $nombre = $conexion->real_escape_string($nombre);
 
-// Manejar errores de conexión
+    // Verificar si la comuna ya existe
+    $resultado = $conexion->query("SELECT * FROM comuna WHERE Com_nom = '$nombre'");
+    if ($resultado->num_rows > 0) {
+        // Si existe, verificar si está oculta
+        $fila = $resultado->fetch_assoc();
+        if ($fila['Oculto'] == 0) {
+            // Si está oculta, actualizar su estado a visible
+            $conexion->query("UPDATE comuna SET Oculto = 1 WHERE Com_nom = '$nombre'");
+        } else {
+            // Si ya está visible, mostrar un mensaje de error
+            echo "La comuna ya existe y está visible.";
+        }
+    } else {
+        // Si no existe, insertar nueva comuna con estado visible (Oculto = 1)
+        $conexion->query("INSERT INTO comuna (Com_nom, Oculto) VALUES ('$nombre', 1)");
+    }
+}
+
+// Función para editar una comuna
+function editarComuna($conexion, $nombre_original, $nombre) {
+    $nombre_original = $conexion->real_escape_string($nombre_original);
+    $nombre = $conexion->real_escape_string($nombre);
+    
+    // Actualizar nombre de la comuna
+    $conexion->query("UPDATE comuna SET Com_nom = '$nombre' WHERE Com_nom = '$nombre_original'");
+}
+
+// Función para eliminar una comuna (marcarla como oculta)
+function eliminarComuna($conexion, $nombre) {
+    $nombre = $conexion->real_escape_string($nombre);
+    
+    // Cambiar estado a oculto (Oculto = 0) en lugar de eliminar
+    $conexion->query("UPDATE comuna SET Oculto = 0 WHERE Com_nom = '$nombre'");
+}
+
+// Conexión a la base de datos
+$conexion = new mysqli("localhost", "root", "Patita05$", "bookswap");
+
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
@@ -10,33 +48,11 @@ if ($conexion->connect_error) {
 // Procesar operaciones
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['crear']) && !empty($_POST['nombre'])) {
-        $nombre = $conexion->real_escape_string($_POST['nombre']);
-        
-        // Verificar si la comuna ya existe
-        $resultado = $conexion->query("SELECT * FROM comuna WHERE Com_nom = '$nombre'");
-        if ($resultado->num_rows > 0) {
-            // Si existe, verificar si está oculta
-            $fila = $resultado->fetch_assoc();
-            if ($fila['Oculto'] == 0) {
-                // Si está oculta, actualizar su estado a visible
-                $conexion->query("UPDATE comuna SET Oculto = 1 WHERE Com_nom = '$nombre'");
-            } else {
-                // Si ya está visible, mostrar un mensaje de error
-                echo "La comuna ya existe y está visible.";
-            }
-        } else {
-            // Si no existe, insertar nueva comuna con estado visible (Oculto = 1)
-            $conexion->query("INSERT INTO comuna (Com_nom, Oculto) VALUES ('$nombre', 1)");
-        }
+        crearComuna($conexion, $_POST['nombre']);
     } elseif (isset($_POST['editar']) && !empty($_POST['nombre_original']) && !empty($_POST['nombre'])) {
-        $nombre_original = $conexion->real_escape_string($_POST['nombre_original']);
-        $nombre = $conexion->real_escape_string($_POST['nombre']);
-        // Actualizar nombre de comuna
-        $conexion->query("UPDATE comuna SET Com_nom = '$nombre' WHERE Com_nom = '$nombre_original'");
+        editarComuna($conexion, $_POST['nombre_original'], $_POST['nombre']);
     } elseif (isset($_POST['eliminar']) && !empty($_POST['nombre'])) {
-        $nombre = $conexion->real_escape_string($_POST['nombre']);
-        // Cambiar estado a oculto (Oculto = 0) en lugar de eliminar
-        $conexion->query("UPDATE comuna SET Oculto = 0 WHERE Com_nom = '$nombre'");
+        eliminarComuna($conexion, $_POST['nombre']);
     }
 }
 
@@ -63,7 +79,9 @@ $resultado = $conexion->query("SELECT * FROM comuna WHERE Oculto = 1");
         </nav>
     </div>
     <div class="main-content">
-        <h2>Mantenedor de Comunas</h2>
+        <header class="main-header">
+            <h2>Mantenedor de Comunas</h2>
+        </header>
         <form action="mantenedor_comu.php" method="POST">
             <input type="text" name="nombre" placeholder="Nombre de la comuna" required>
             <button type="submit" name="crear">Crear</button>
